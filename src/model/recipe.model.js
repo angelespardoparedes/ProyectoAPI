@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
-const trackSchema = new mongoose.Schema({
+const recipeSchema = new mongoose.Schema({
   isrc: {
+    type: String,
+    required: true,
+    trim: true,
+    unique: true,
+  },
+  categoria: {
     type: String,
     required: true,
     trim: true,
@@ -11,26 +17,20 @@ const trackSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  contributors: {
+  ingredients: {
+    type: [String],
+    required: true,
+    trim: true,
+  },
+  instructions: {
     type: String,
     required: true,
     trim: true,
   },
-  genre: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  lineCYear: {
-    type: Number,
-    required: true,
-    trim: true,
-  },
-  lineCPublisher: {
-    type: String,
-    required: true,
-    trim: true,
+  image: {
+    data: Buffer,
+    contentType: String,
   },
 });
-const Track = mongoose.model("Track", trackSchema);
-module.exports = Track;
+const Recipe = mongoose.model("Recipe", recipeSchema);
+module.exports = Recipe;
